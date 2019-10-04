@@ -74,6 +74,7 @@ var createContainer = function createContainer(aContainerImage, aCommand, aWorki
     method: 'POST'
   };
 
+  logger.debug(options);
 
   return request(options)
     .spread(function(response, body) {
@@ -116,6 +117,8 @@ var createContainer = function createContainer(aContainerImage, aCommand, aWorki
       }
     })
     .catch(function(err) {
+
+      console.log(err);
 
       var errResult = {
         statusCode: 500,
