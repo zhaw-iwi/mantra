@@ -1,4 +1,4 @@
-# Mantra
+# Mantra (zhaw-iwi)
 Web service for compiling and running programs. Part of the codeboard.io project.
 
 ## Requirements
