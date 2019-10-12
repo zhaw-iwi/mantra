@@ -32,23 +32,20 @@
     "url": "git://github.com/codeboardio/mantra.git"
   },
   "dependencies": {
-    "express": "4.13.1",
+    "express": "^4.17.1",
     "http-proxy": "1.11.1",
-    "body-parser": "1.13.3",
+    "body-parser": "^1.19.0",
     "mkdirp": "0.5.0",
     "bluebird": "2.9.34",
-    "request":"2.61.0",
+    "request": "^2.88.0",
     "winston": "1.0.1",
-    "websocket": "1.0.21",
-    "lodash": "3.10.1"
+    "websocket": "^1.0.30",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "mocha": "2.2.5",
+    "mocha": "^6.2.1",
     "should": "7.0.1",
-    "supertest": "1.0.1"
-  },
-  "engines": {
-    "node": ">= 0.12.x"
+    "supertest": "4.0.2"
   },
   "license": "MIT"
 }
