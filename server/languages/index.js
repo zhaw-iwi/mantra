@@ -11,22 +11,6 @@ var CONST = require('../config/const.js'),
 // Array that lists all supported languages and their property files
 var languages = [
   {
-    name: CONST.LANGUAGE_NAME.C,
-    propertyFile: 'c.js'
-  },
-  {
-    name: CONST.LANGUAGE_NAME.CPP,
-    propertyFile: 'cpp.js'
-  },
-  {
-    name: CONST.LANGUAGE_NAME.HASKELL,
-    propertyFile: 'haskell.js'
-  },
-  {
-    name: CONST.LANGUAGE_NAME.HASKELL_HSPEC,
-    propertyFile: 'haskell-hspec.js'
-  },
-  {
     name: CONST.LANGUAGE_NAME.JAVA,
     propertyFile: 'java.js'
   },
@@ -78,7 +62,7 @@ var isDynamicLanguage= function (aLangugae) {
 
 /**
  * Returns true if given language supports test action.
- * @param aLangugae {String} a language
+ * @param aLanguage {String} a language
  * @returns {boolean} true if test action is supported by language, otherwise false.
  */
 var isLanguageWithTestSupport = function (aLanguage) {
@@ -122,19 +106,6 @@ var getSanitizedLanguage = function (aLanguage) {
 
   }
   return sanitzedLang;
-};
-
-
-
-// function returns
-var getProjectProperties = function (aLanguage) {
-
-  if(aLanguage.toLowerCase().indexOf(languages) !== -1) {
-
-
-    return ;
-  }
-
 };
 
 
@@ -251,7 +222,6 @@ module.exports = {
   hasCompilationErrors: hasCompilationErrors,
   parseTestOutput: parseTestOutput,
   getLanguageProperties: getLanguageProperties,
-
   isCodeboardConfigRequired: isCodeboardConfigRequired,
   getDockerImageName: getDockerImageName
-}
+};

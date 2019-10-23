@@ -15,10 +15,6 @@ module.exports = {
   },
 
   LANGUAGE_NAME: {
-    C: 'C',
-    CPP: 'C++',
-    HASKELL: 'Haskell',
-    HASKELL_HSPEC: 'Haskell-HSpec',
     JAVA: 'Java',
     JAVA_JUNIT: 'Java-JUnit',
     PYTHON: 'Python',
