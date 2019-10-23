@@ -11,7 +11,8 @@ module.exports = {
   // Note: all actions are expected to be lowercase with preceding or trailing whitespaces.
   ACTION: {
     COMPILE: 'compile',
-    RUN: 'run'
+    RUN: 'run',
+    TEST: 'test'
   },
 
   LANGUAGE_NAME: {
