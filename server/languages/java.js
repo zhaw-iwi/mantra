@@ -24,7 +24,7 @@ module.exports = {
   isLanguageWithTestSupport: false,
 
   // name of the docker image that is used to execute "compile" or "run" for this language
-  dockerImage: 'cobo/java8-junit4',
+  dockerImage: 'cobo/java',
 
   // timeout settings that will apply to all containers of this language
   timeoutSettings: {
