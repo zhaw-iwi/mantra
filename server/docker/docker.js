@@ -382,8 +382,11 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
       });
       connection.on('message', function(message) {
 
-          console.log(message);
-          console.log(message.type);
+        if (message.type === 'utf8') {
+          stdOutput += message.utf8Data;
+        } else if (message.type === 'binary') {
+          stdOutput += Buffer.from(message, "binary").toString('utf8');
+        }
 
         //if (message.type === 'utf8') {
           stdOutput += message;
