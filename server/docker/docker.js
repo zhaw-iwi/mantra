@@ -382,7 +382,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
       });
       connection.on('message', function(message) {
         //if (message.type === 'utf8') {
-          stdOutput += message.utf8Data;
+          stdOutput += message;
         //}
       });
 
