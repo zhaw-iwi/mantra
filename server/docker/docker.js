@@ -381,16 +381,12 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
         resolve(stdOutput);
       });
       connection.on('message', function(message) {
-
         if (message.type === 'utf8') {
           stdOutput += message.utf8Data;
         } else if (message.type === 'binary') {
-          stdOutput += message.binaryData;
+          console.log('binary')
+          // stdOutput += message.binaryData;
         }
-
-        //if (message.type === 'utf8') {
-          stdOutput += message;
-        //}
       });
 
       // start the container
