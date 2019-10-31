@@ -392,7 +392,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
 
           console.log('binary' + message.binaryData);
 
-          if(message.binaryData === 'Type something to test this out: ') {
+          if(message.binaryData.equals('Type something to test this out: ')) {
             connection.send("Teste Input");
           }
 
