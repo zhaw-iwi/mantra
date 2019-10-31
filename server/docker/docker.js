@@ -384,6 +384,10 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
           console.log('utf8' + message.utf8Data);
           stdOutput += message.utf8Data;
         } else if (message.type === 'binary') {
+
+          console.log("Binary Type" + message.binaryType);
+          console.log("Binary Payload" + message.binaryPayload);
+
           console.log('binary' + message.binaryData);
           stdOutput += message.binaryData;
         } else {
