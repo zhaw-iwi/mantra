@@ -379,10 +379,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
         logger.debug('dockerjs.attachAndRunContainer: Websocket connection closed');
         resolve(stdOutput);
       });
-      connection.on('message', function(message, flags, target) {
-
-        console.log(flags);
-        console.log(target);
+      connection.on('message', function(message) {
 
         if (message.type === 'utf8') {
           console.log('utf8' + message.utf8Data);
@@ -391,14 +388,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
 
           console.log(message);
 
-          console.log("Binary Type" + message.binaryType);
-          console.log("Binary Payload" + message.binaryPayload);
-
-          console.log('binary' + message.binaryData);
-
-          if(message.binaryData.equals('Type something to test this out: ')) {
-            connection.send("Teste Input");
-          }
+          console.log('binary: ' + message.binaryData.toString());
 
           stdOutput += message.binaryData;
         }
