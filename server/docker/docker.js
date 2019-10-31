@@ -356,6 +356,10 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
     wsClient.on('connect', function(connection) {
       logger.debug('dockerjs.attachAndRunContainer: WebSocket client connected');
 
+
+
+      connection.send("Input1'\n'Input2'\n'");
+
       // variable to store the messages that we receive through the Websocket
       var stdOutput = '';
 
@@ -388,13 +392,12 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
 
           console.log(message);
           console.log('binary: ' + message.binaryData.toString());
-
+/*
           // send input data
           // todo wie finden wir heraus wann ein Input verlangt ist?
           if(message.binaryData.toString().localeCompare('Type something to test this out: ') === 0) {
-            console.log("Input required");
-            connection.send("ab'\n'");
-          }
+            connection.send("Input'\n'"); // es braucht einen Umbruch \n damit der Input gesetzt wird..
+          }*/
 
           stdOutput += message.binaryData;
         }
