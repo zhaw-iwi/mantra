@@ -386,9 +386,10 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
         } else if (message.type === 'binary') {
           console.log('binary' + message.binaryData);
           stdOutput += message.binaryData;
+        } else {
+          console.log("Sonst.");
         }
 
-        connection.send("Lorem Ipsum");
       });
 
       // start the container
