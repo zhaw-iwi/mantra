@@ -392,14 +392,8 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
           // send input data
           // todo wie finden wir heraus wann ein Input verlangt ist?
           if(message.binaryData.toString().localeCompare('Type something to test this out: ') === 0) {
-
-            var b = Buffer.from('test'),
-                ab = b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength);
-
-
-
             console.log("Input required");
-            connection.send(ab);
+            connection.send("ab'\n'");
           }
 
           stdOutput += message.binaryData;
