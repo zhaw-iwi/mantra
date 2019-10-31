@@ -392,7 +392,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
 
           if(message.binaryData.toString().localeCompare('Type something to test this out: ') === 0) {
             console.log("Input required");
-            connection.send('test');
+            wsClient.send('test');
           }
 
           stdOutput += message.binaryData;
