@@ -390,6 +390,11 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
 
           console.log('binary: ' + message.binaryData.toString());
 
+          if(message.binaryData.toString().localeCompare('Type something to test this out: ')) {
+            console.log("Input required");
+            connection.send('test');
+          }
+
           stdOutput += message.binaryData;
         }
 
