@@ -348,7 +348,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
     // create a websocket client
     var wsClient = new WebSocketClient();
     // construct the Websocket Uri
-    var wsUri = 'ws://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/attach/ws?logs=0&stream=1&stdout=1&stdin=1&stderr=1';
+    var wsUri = 'ws://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/attach/ws?logs=1&stream=1&stdout=1&stdin=1&stderr=1';
 
     logger.debug('dockerjs.attachAndRunContainer: websocket uri: ' + wsUri);
 
@@ -391,8 +391,12 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
           console.log('binary: ' + message.binaryData.toString());
 
           if(message.binaryData.toString().localeCompare('Type something to test this out: ') === 0) {
+
+            var blob = new Blob(['test'], {type: 'text/plain'});
+
+
             console.log("Input required");
-            connection.send('test');
+            connection.send(blob);
           }
 
           stdOutput += message.binaryData;
