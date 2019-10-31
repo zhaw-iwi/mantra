@@ -387,16 +387,19 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
         } else if (message.type === 'binary') {
 
           console.log(message);
-
           console.log('binary: ' + message.binaryData.toString());
 
+          // send input data
+          // todo wie finden wir heraus wann ein Input verlangt ist?
           if(message.binaryData.toString().localeCompare('Type something to test this out: ') === 0) {
 
-            var blob = new Blob(['test'], {type: 'text/plain'});
+            var b = Buffer.from('test'),
+                ab = b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength);
+
 
 
             console.log("Input required");
-            connection.send(blob);
+            connection.send(ab);
           }
 
           stdOutput += message.binaryData;
