@@ -356,9 +356,6 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
     wsClient.on('connect', function(connection) {
       logger.debug('dockerjs.attachAndRunContainer: WebSocket client connected');
 
-
-      connection.send("Lorem Ipsum");
-
       // variable to store the messages that we receive through the Websocket
       var stdOutput = '';
 
@@ -390,6 +387,8 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
           console.log('binary' + message.binaryData);
           stdOutput += message.binaryData;
         }
+
+        connection.send("Lorem Ipsum");
       });
 
       // start the container
