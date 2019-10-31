@@ -548,7 +548,7 @@ var handleStreamOption = function handleStreamOption (req, res, next) {
 
   if (!(req.mantra.stream)) {
 
-    docker.attachAndRunContainer(req.mantra.containerId)
+    docker.attachAndRunContainer(req.mantra.containerId, req.mantra.input)
       .then(function (stdOutput) {
 
         var resultPayload = {

@@ -337,18 +337,23 @@ var removeContainer = function (aContainerId, aForceRemoval) {
  * Attaches to a given container via Websocket. Start the containers and waits until the
  * WS connection closes. Saves all the output the container generates and finally returns it as part of a resolving
  * promise.
+ *
+ * Added input as function parameter and set wcUri stdin to true. If an input is passed, it is sent via connection.send
+ * to the docker api. Multiple inputs are separated with a line break `\n` (michojan)
+ *
  * @param {number} aContainerId id of the container that should be run
+ * @param {string} input
  * @returns {bluebird} Promise that resolves to a String which is the output of running the container. If an error
  * occurs, the the Promise is rejected and a String with an error message is returned.
  */
-var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
+var attachAndRunContainer = function attachAndRunContainer (aContainerId, input = '') {
 
   return new Promise(function (resolve, reject) {
 
     // create a websocket client
     var wsClient = new WebSocketClient();
     // construct the Websocket Uri
-    var wsUri = 'ws://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/attach/ws?logs=1&stream=1&stdout=1&stdin=1&stderr=1';
+    var wsUri = 'ws://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/attach/ws?logs=0&stream=1&stdout=1&stdin=1&stderr=1';
 
     logger.debug('dockerjs.attachAndRunContainer: websocket uri: ' + wsUri);
 
@@ -356,9 +361,10 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
     wsClient.on('connect', function(connection) {
       logger.debug('dockerjs.attachAndRunContainer: WebSocket client connected');
 
-
-
-      connection.send("Input1'\n'Input2'\n'");
+      // input passed to the docker api, separated by line breaks `\n` (michojan)
+      if(input !== '') {
+        connection.send(input);
+      }
 
       // variable to store the messages that we receive through the Websocket
       var stdOutput = '';
@@ -384,24 +390,12 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId) {
         resolve(stdOutput);
       });
       connection.on('message', function(message) {
-
+        // check message type and convert to string (michojan)
         if (message.type === 'utf8') {
-          console.log('utf8' + message.utf8Data);
           stdOutput += message.utf8Data;
         } else if (message.type === 'binary') {
-
-          console.log(message);
-          console.log('binary: ' + message.binaryData.toString());
-/*
-          // send input data
-          // todo wie finden wir heraus wann ein Input verlangt ist?
-          if(message.binaryData.toString().localeCompare('Type something to test this out: ') === 0) {
-            connection.send("Input'\n'"); // es braucht einen Umbruch \n damit der Input gesetzt wird..
-          }*/
-
           stdOutput += message.binaryData;
         }
-
       });
 
       // start the container
