@@ -80,15 +80,6 @@ module.exports = {
    * @returns {boolean} true is "aCompilerOutput" represents compilation errors (by default false)
    */
   hasCompilationErrors: function (aCompilerOutput) {
-
-    console.log(aCompilerOutput);
-
-    var hasErrors = true;
-
-    if (aCompilerOutput === '' || aCompilerOutput === '\n' || aCompilerOutput.indexOf("Compilation successful") !== -1 ) {
-      hasErrors = false;
-    }
-
-    return hasErrors;
+    return false;
   }
 };
