@@ -21,8 +21,8 @@ module.exports = {
   isDynamicLanguage: false,
 
   // does the language come with supports for (unit) tests?
-  // TODO: once we move from Kali to Mantra, make this true
-  isLanguageWithTestSupport: false,
+  // TODO: once we move from Kali to Mantra, make this true :: true
+  isLanguageWithTestSupport: true,
 
   // name of the docker image that is used to execute "compile" or "run" for this language
   dockerImage: 'cobo/java',

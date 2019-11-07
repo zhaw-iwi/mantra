@@ -361,7 +361,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
     wsClient.on('connect', function(connection) {
       logger.debug('dockerjs.attachAndRunContainer: WebSocket client connected');
 
-      // input passed to the docker api, separated by line breaks `\n` (michojan)
+      // input passed to the docker api, separated by line breaks `\n` (janick)
       if(input !== '') {
         connection.send(input);
       }
@@ -390,7 +390,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
         resolve(stdOutput);
       });
       connection.on('message', function(message) {
-        // check message type and convert to string (michojan)
+        // check message type and convert to string (janick)
         if (message.type === 'utf8') {
           stdOutput += message.utf8Data;
         } else if (message.type === 'binary') {

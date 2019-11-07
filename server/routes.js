@@ -27,8 +27,10 @@ module.exports = function(app) {
   // this sequence of middleware handles the "compile" command
   app.post('/:mantraId', mw.verifyActionIsCompileElseNR, mw.verifyFiles, mw.writeFilesToDisk, mw.setCookie, mw.getCmdForCompileAction, mw.createContainer, );
 
-  // todo this sequence of middleware handles "compile" command
+  // todo this sequence of middleware handles "test" command
   app.post('/:mantraId', mw.verifyActionIsTest, mw.verifyMantraId, mw.setCookie, mw.getCmdForTestAction, mw.createContainer, /* ... */ mw.handleStreamOption);
+
+  // mw.executeAndAnalyzeTestContainer
 
 
   // routes to start and stop a container (using websockets)
