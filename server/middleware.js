@@ -67,6 +67,9 @@ var verifyAction = function (req, res, next) {
 
 
 var verifyActionIsRunElseNR = function verifyActionIsRun(req, res, next) {
+
+  console.log(req.mantra.action);
+
   if (util.isActionRun(req.mantra.action)) {
     next();
   }
@@ -326,9 +329,15 @@ var writeFilesToDisk = function(req, res, next) {
 
   util.isValidMantraId(lMantraId).then(function(isValid) {
       if (isValid) {
+
+        console.log("Valide Mantra ID");
+
         return lMantraId;
       }
       else {
+
+        console.log("Neue Mantra ID");
+
         return util.getNewMantraId();
       }
     })
