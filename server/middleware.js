@@ -403,6 +403,8 @@ var writeTestFilesToDisk = function writeTestFilesToDisk (req, res, next) {
  */
 var getCmdForCompileAction = function getCmdForCompileAction (req, res, next) {
 
+  console.log("getCmdForCompileAction");
+
   var cmd = languages.getCommandForCompileAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
 
   req.mantra.command = cmd;
@@ -470,6 +472,8 @@ var setCookie = function setCookie (req, res, next) {
 
 
 var createContainer = function createContainer (req, res, next) {
+
+  console.log("createContainer");
 
 
   var imageName = languages.getLanguageProperties(req.mantra.language).dockerImage;
