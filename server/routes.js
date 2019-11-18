@@ -28,7 +28,7 @@ module.exports = function(app) {
   app.post('/:mantraId', mw.verifyActionIsCompileElseNR, mw.verifyFiles, mw.writeFilesToDisk, mw.setCookie, mw.getCmdForCompileAction, mw.createContainer, );
 
   // todo this sequence of middleware handles "test" command
-  app.post('/:mantraId', mw.verifyActionIsTest, mw.verifyMantraId, mw.setCookie, mw.getCmdForTestAction, mw.createContainer, /* ... */ mw.handleStreamOption);
+  // app.post('/:mantraId', mw.verifyActionIsTest, mw.verifyMantraId, mw.setCookie, mw.getCmdForTestAction, mw.createContainer, /* ... */ mw.handleStreamOption);
 
   // mw.executeAndAnalyzeTestContainer
 

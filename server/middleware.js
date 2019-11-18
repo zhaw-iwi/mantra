@@ -490,6 +490,8 @@ var createContainer = function createContainer (req, res, next) {
   docker.createContainer(imageName, req.mantra.command, mantraDir, req.mantra.stream, timeoutSettings)
     .then(function(successResult) {
 
+      console.log("Docker created");
+
       // add the details about the Websocket Url and the Url to start the container on the mantra object
       req.mantra.containerId = successResult.containerId;
 
