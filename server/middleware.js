@@ -460,6 +460,8 @@ var getCmdForTestAction = function getCmdForTestAction (req, res, next) {
  */
 var setCookie = function setCookie (req, res, next) {
 
+    console.log("SetCookie");
+
   if (config.cookie.setCookie) {
     res.cookie(config.cookie.name, req.mantra.mantraId);
   }
