@@ -80,6 +80,8 @@ var isSupportedAction = function (aAction) {
 
   var isValidAction = false;
 
+  console.log(aAction);
+
   for(var property in CONST.ACTION) {
 
     console.log(property);
@@ -90,6 +92,8 @@ var isSupportedAction = function (aAction) {
       }
     }
   }
+
+  console.log(isValidAction);
 
   return isValidAction;
 };
