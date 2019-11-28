@@ -46,6 +46,17 @@ var isActionRun = function (aAction) {
   return CONST.ACTION.RUN === aAction;
 };
 
+/**
+ * Returns true if aAction represents the "compileAndRun" action.
+ * Note: you should sanitize aAction before calling this function.
+ * @author Janick Michot
+ * @param aAction {String} the action to check
+ * @returns {boolean} true if aAction represents "compile"
+ */
+var isActionCompileAndRun = function (aAction) {
+  return CONST.ACTION.COMPILE_AND_RUN === aAction;
+};
+
 
 /**
  * Returns true if aAction represents the "test" action.
@@ -353,6 +364,7 @@ var writeFilesToDisk = function (aFiles, aPath) {
 module.exports = {
   isActionCompile: isActionCompile,
   isActionRun: isActionRun,
+  isActionCompileAndRun: isActionCompileAndRun,
   isActionTest: isActionTest,
   isSupportedAction: isSupportedAction,
   getListOfValidActions: getListOfValidActions,

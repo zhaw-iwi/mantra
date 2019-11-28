@@ -88,6 +88,15 @@ var verifyActionIsCompileElseNR = function verifyActionIsCompile (req, res, next
   }
 };
 
+var verifyActionIsCompileAndRunElseNR = function verifyActionIsCompileAndRun (req, res, next) {
+  if (util.isActionCompileAndRun(req.mantra.action)) {
+    next();
+  }
+  else {
+    next('route');
+  }
+};
+
 
 /**
  * Verifies that the action on the request object is a "test" action;
@@ -430,6 +439,19 @@ var getRunCommand = function getRunCommand (req, res, next) {
 
 };
 
+/**
+ * Assumes: req.mantra.language is set
+ * @author Janick Michot
+ * @param req request
+ * @param res response
+ * @param next next
+ */
+var getCmdForCompileAndRunAction = function getCmdForCompileAndRunAction (req, res, next) {
+  console.log("getCmdForCompileAndRunAction");
+  req.mantra.command = languages.getCommandForCompileAndRunAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
+  next();
+};
+
 
 /**
  * Returns the command for a test action.
@@ -571,6 +593,7 @@ var handleStreamOption = function handleStreamOption (req, res, next) {
         var resultPayload = {
           id: req.mantra.mantraId,
           output: stdOutput,
+          outputArray: stdOutput, // todo hier Funktion aufrufen, die den Output in einzelne Fehler aufteilt :: languages.hasCompilationErrors(req.mantra.language, stdOutput);
           stream: false
         };
 
@@ -704,6 +727,7 @@ module.exports = {
   verifyAction: verifyAction,
   verifyActionIsRunElseNR: verifyActionIsRunElseNR,
   verifyActionIsCompileElseNR: verifyActionIsCompileElseNR,
+  verifyActionIsCompileAndRunElseNR: verifyActionIsCompileAndRunElseNR,
   verifyActionIsTest: verifyActionIsTest,
   verifyLanguage: verifyLanguage,
   verifyLanguageSupportsTestAction: verifyLanguageSupportsTestAction,
@@ -714,6 +738,7 @@ module.exports = {
   writeFilesToDisk: writeFilesToDisk,
   writeTestFilesToDisk: writeTestFilesToDisk,
   getCmdForCompileAction: getCmdForCompileAction,
+  getCmdForCompileAndRunAction: getCmdForCompileAndRunAction,
   getRunCommand: getRunCommand,
   getCmdForTestAction: getCmdForTestAction,
   setCookie: setCookie,

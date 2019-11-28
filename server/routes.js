@@ -26,6 +26,8 @@ module.exports = function(app) {
   app.post('/:mantraId', mw.handleDynamicLanguageNR, mw.verifyActionIsRunElseNR, mw.verifyMantraId, mw.setCookie, mw.getRunCommand, mw.createContainer, mw.handleStreamOption);
   // this sequence of middleware handles the "compile" command
   app.post('/:mantraId', mw.verifyActionIsCompileElseNR, mw.verifyFiles, mw.writeFilesToDisk, mw.setCookie, mw.getCmdForCompileAction, mw.createContainer, mw.handleStreamOption);
+  // this sequence of middleware handles the "compileAndRun" command
+  app.post('/:mantraId', mw.verifyActionIsCompileAndRunElseNR, mw.verifyFiles, mw.writeFilesToDisk, mw.setCookie, mw.getCmdForCompileAndRunAction, mw.createContainer, mw.handleStreamOption);
 
 
   // todo this sequence of middleware handles "test" command

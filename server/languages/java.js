@@ -73,6 +73,22 @@ module.exports = {
     return compileCmd;
   },
 
+  /**
+   * Function to compile and run code at the same time
+   * @author Janick Michot
+   * @param aFiles
+   * @param aCodeboardConfig
+   * @returns {string}
+   */
+  getCommandForCompileAndRunAction: function (aFiles, aCodeboardConfig) {
+    var listOfFilenames = util.getListOfFilenames(aFiles, this.filenameExtension);
+    var compileCmd = 'javac ' + listOfFilenames + ' && java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
+    return compileCmd;
+  },
+
+
+
+
 
   /**
    * Function takes a compiler output as argument and returns "true" if that output

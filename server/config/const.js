@@ -12,6 +12,7 @@ module.exports = {
   ACTION: {
     COMPILE: 'compile',
     RUN: 'run',
+    COMPILE_AND_RUN: 'compileAndRun',
     TEST: 'test'
   },
 
