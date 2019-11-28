@@ -80,21 +80,13 @@ var isSupportedAction = function (aAction) {
 
   var isValidAction = false;
 
-  console.log(aAction);
-
   for(var property in CONST.ACTION) {
-
-    console.log(property);
-
     if(CONST.ACTION.hasOwnProperty(property)) {
       if(CONST.ACTION[property] === aAction) {
         isValidAction = true;
       }
     }
   }
-
-  console.log(isValidAction);
-
   return isValidAction;
 };
 
