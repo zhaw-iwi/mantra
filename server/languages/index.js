@@ -135,6 +135,18 @@ var getCommandForRunAction = function (aLanguage, aCodeboardConfig) {
   return props.getCommandForRunAction(aCodeboardConfig);
 };
 
+/**
+ * Assumes: aLanguage is a valid language and has been sanitized
+ *
+ * @param {string} aLanguage the language for which to get the command
+ * @param {object} aCodeboardConfig the codeboard config (e.g. codeboard.json) file
+ * @return
+ */
+var getCommandForCompileAndRunAction = function (aLanguage, aCodeboardConfig, aFiles) {
+  var props = languageProperties[aLanguage];
+  return props.getCommandForCompileAndRunAction(aFiles, aCodeboardConfig);
+};
+
 
 /**
  * Returns the command for running a test action.
@@ -218,6 +230,7 @@ module.exports = {
   getSanitizedLanguage: getSanitizedLanguage,
   getCommandForCompileAction: getCommandForCompileAction,
   getCommandForRunAction: getCommandForRunAction,
+  getCommandForCompileAndRunAction: getCommandForCompileAndRunAction,
   getCommandForTestAction: getCommandForTestAction,
   hasCompilationErrors: hasCompilationErrors,
   parseTestOutput: parseTestOutput,
