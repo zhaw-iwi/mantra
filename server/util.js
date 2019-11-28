@@ -81,6 +81,9 @@ var isSupportedAction = function (aAction) {
   var isValidAction = false;
 
   for(var property in CONST.ACTION) {
+
+    console.log(property);
+
     if(CONST.ACTION.hasOwnProperty(property)) {
       if(CONST.ACTION[property] === aAction) {
         isValidAction = true;
