@@ -412,9 +412,11 @@ var writeTestFilesToDisk = function writeTestFilesToDisk (req, res, next) {
  */
 var getCmdForCompileAction = function getCmdForCompileAction (req, res, next) {
 
-  console.log("getCmdForCompileAction");
-
-  var cmd = languages.getCommandForCompileAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
+  if(req.action === 'compileandrun') {
+    var cmd = languages.getCommandForCompileAndRunAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
+  } else {
+    var cmd = languages.getCommandForCompileAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
+  }
 
   req.mantra.command = cmd;
 
