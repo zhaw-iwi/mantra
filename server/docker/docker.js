@@ -363,7 +363,12 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
 
       // input passed to the docker api, separated by line breaks `\n` (janick)
       if(input !== '') {
-        connection.send(["Input 1", "Input 2"]);
+
+          var x = new Float32Array(2);
+          x[0] = "Hans";
+          x[0] = "Peter";
+
+        connection.send(x);
       }
 
       // variable to store the messages that we receive through the Websocket
