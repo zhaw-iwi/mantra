@@ -401,6 +401,8 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
       });
       connection.on('message', function(message) {
 
+        console.log("+");
+
         // check message type and convert to string (janick)
         if (message.type === 'utf8') {
           stdOutput += message.utf8Data;
