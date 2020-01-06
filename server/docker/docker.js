@@ -370,7 +370,9 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
 
           console.log("Send random number " + number);
 
-          connection.sendUTF(number.toString());
+          connection.send(number.toString(), function() {
+            console.log("Write number finish: " + number);
+          });
         }
       }
       sendInput();
