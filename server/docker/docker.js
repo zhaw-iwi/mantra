@@ -342,11 +342,11 @@ var removeContainer = function (aContainerId, aForceRemoval) {
  * to the docker api. Multiple inputs are separated with a line break `\n` (michojan)
  *
  * @param {number} aContainerId id of the container that should be run
- * @param {string} input
+ * @param {array} input
  * @returns {bluebird} Promise that resolves to a String which is the output of running the container. If an error
  * occurs, the the Promise is rejected and a String with an error message is returned.
  */
-var attachAndRunContainer = function attachAndRunContainer (aContainerId, input = '') {
+var attachAndRunContainer = function attachAndRunContainer (aContainerId, input = []) {
 
   return new Promise(function (resolve, reject) {
 
@@ -358,23 +358,34 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
     logger.debug('dockerjs.attachAndRunContainer: websocket uri: ' + wsUri);
 
 
-
-
     wsClient.on('connect', function(connection) {
       logger.debug('dockerjs.attachAndRunContainer: WebSocket client connected');
 
 
+      // time is used ..
+      let timer = 0;
+
+      // index of current input
+      let inputIndex = 0;
+
+      /**
+       *
+       */
       function sendInput() {
+
         if (connection.connected) {
+          let input = (typeof input[inputIndex] !== 'undefined') ? input[inputIndex] + "\n" : "\n";
+
           console.log("Send input" + input);
           connection.send(input.toString(), function() {
             console.log("Write number finish: " + input);
           });
+          inputIndex++;
         }
       }
 
 
-      let timer = 0;
+
 
       // variable to store the messages that we receive through the Websocket
       var stdOutput = '';
