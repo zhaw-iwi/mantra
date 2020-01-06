@@ -362,34 +362,33 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
       logger.debug('dockerjs.attachAndRunContainer: WebSocket client connected');
 
 
-      // time is used ..
-      let timer = 0;
+      // `timer` contains the timeoutId and `timeout` the seconds to wait before firing `sendInput`
+      let timer = 0,
+          timeout = 4000; // todo what is an appropriate timeout?
+
 
       // index of current input
       let inputIndex = 0;
 
       /**
-       *
+       * This function is called after each message received using a timeout
+       * After `timeout`-seconds this functions sends an input as a line with a line-break at the end
+       * If no input is needed, `timer` is reset to 0 and the timout is cleared.
+       * In this way it can be determined more or less accurately whether an input is required or not.
        */
       function sendInput() {
-
         if (connection.connected) {
+          // get input for current line
           let input = (typeof inputs[inputIndex] !== 'undefined') ? inputs[inputIndex] : "";
 
-          console.log("Send input " + input);
-
+          // add line break at the end of the string
           input += '\n';
 
-          console.log("Send input " + input);
-
-          connection.send(input, function() {
-            console.log("Write number finish: " + input);
-          });
+          // send data
+          connection.send(input);
           inputIndex++;
         }
       }
-
-
 
 
       // variable to store the messages that we receive through the Websocket
@@ -423,11 +422,14 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
       });
       connection.on('message', function(message) {
 
+        // reset timer on each message
         if (timer) {
           clearTimeout(timer);
           timer = 0;
         }
-        timer = setTimeout(sendInput, 2000);
+
+        // Set timeout, which sends an input after a certain time if no further messages are received
+        timer = setTimeout(sendInput, timeout);
 
         // check message type and convert to string (janick)
         if (message.type === 'utf8') {
