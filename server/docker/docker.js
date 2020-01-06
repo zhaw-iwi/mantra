@@ -358,18 +358,19 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
     logger.debug('dockerjs.attachAndRunContainer: websocket uri: ' + wsUri);
 
 
+
+
     wsClient.on('connect', function(connection) {
       logger.debug('dockerjs.attachAndRunContainer: WebSocket client connected');
 
-      // input passed to the docker api, separated by line breaks `\n` (janick)
-      if(input !== '') {
 
-          var x = new Float32Array(2);
-          x[0] = "Hans";
-          x[0] = "Peter";
-
-        connection.send(x);
+      function sendInput() {
+        if (connection.connected) {
+          var number = Math.round(Math.random() * 0xFFFFFF);
+          connection.sendUTF(number.toString());
+        }
       }
+      sendInput();
 
       // variable to store the messages that we receive through the Websocket
       var stdOutput = '';
