@@ -374,9 +374,14 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
       function sendInput() {
 
         if (connection.connected) {
-          let input = (typeof inputs[inputIndex] !== 'undefined') ? inputs[inputIndex] + "\n" : "\n";
+          let input = (typeof inputs[inputIndex] !== 'undefined') ? inputs[inputIndex] : "";
 
-          console.log("Send input" + input);
+          console.log("Send input " + input);
+
+          input += '\n';
+
+          console.log("Send input " + input);
+
           connection.send(input.toString(), function() {
             console.log("Write number finish: " + input);
           });
