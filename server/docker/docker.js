@@ -412,6 +412,12 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
         resolve(stdOutput);
       });
       connection.on('close', function() {
+
+        if (timer) {
+          clearTimeout(timer);
+          timer = 0;
+        }
+
         logger.debug('dockerjs.attachAndRunContainer: Websocket connection closed');
         resolve(stdOutput);
       });
