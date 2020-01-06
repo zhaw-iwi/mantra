@@ -401,15 +401,13 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
       });
       connection.on('message', function(message) {
 
-        console.log(message);
-
         // check message type and convert to string (janick)
         if (message.type === 'utf8') {
           stdOutput += message.utf8Data;
-          console.log(message.utf8Data);
+          console.log("Msg received " + message.utf8Data);
         } else if (message.type === 'binary') {
           stdOutput += message.binaryData;
-          console.log(message.binaryData);
+          console.log("Msg received " +  message.binaryData);
         }
       });
 
