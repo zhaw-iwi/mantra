@@ -366,15 +366,15 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
 
       function sendInput() {
         if (connection.connected) {
-
           console.log("Send input" + input);
-
           connection.send(input.toString(), function() {
             console.log("Write number finish: " + input);
           });
         }
       }
-      sendInput();
+
+
+      let timer = 0;
 
       // variable to store the messages that we receive through the Websocket
       var stdOutput = '';
@@ -401,7 +401,11 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
       });
       connection.on('message', function(message) {
 
-        console.log("+");
+        if (timer) {
+          clearTimeout(timer);
+          timer = 0;
+        }
+        timer = setTimeout(sendInput, 2000);
 
         // check message type and convert to string (janick)
         if (message.type === 'utf8') {
