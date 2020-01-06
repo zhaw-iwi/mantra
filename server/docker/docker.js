@@ -366,12 +366,11 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
 
       function sendInput() {
         if (connection.connected) {
-          var number = Math.round(Math.random() * 0xFFFFFF);
 
-          console.log("Send random number " + number);
+          console.log("Send input" + input);
 
-          connection.send(number.toString(), function() {
-            console.log("Write number finish: " + number);
+          connection.send(input.toString(), function() {
+            console.log("Write number finish: " + input);
           });
         }
       }
