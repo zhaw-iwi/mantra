@@ -346,7 +346,7 @@ var removeContainer = function (aContainerId, aForceRemoval) {
  * @returns {bluebird} Promise that resolves to a String which is the output of running the container. If an error
  * occurs, the the Promise is rejected and a String with an error message is returned.
  */
-var attachAndRunContainer = function attachAndRunContainer (aContainerId, input = []) {
+var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs = []) {
 
   return new Promise(function (resolve, reject) {
 
@@ -374,7 +374,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
       function sendInput() {
 
         if (connection.connected) {
-          let input = (typeof input[inputIndex] !== 'undefined') ? input[inputIndex] + "\n" : "\n";
+          let input = (typeof inputs[inputIndex] !== 'undefined') ? inputs[inputIndex] + "\n" : "\n";
 
           console.log("Send input" + input);
           connection.send(input.toString(), function() {
