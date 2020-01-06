@@ -367,6 +367,9 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
       function sendInput() {
         if (connection.connected) {
           var number = Math.round(Math.random() * 0xFFFFFF);
+
+          console.log("Send random number " + number);
+
           connection.sendUTF(number.toString());
         }
       }
@@ -402,8 +405,10 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, input 
         // check message type and convert to string (janick)
         if (message.type === 'utf8') {
           stdOutput += message.utf8Data;
+          console.log(message.utf8Data);
         } else if (message.type === 'binary') {
           stdOutput += message.binaryData;
+          console.log(message.binaryData);
         }
       });
 
