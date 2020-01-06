@@ -382,7 +382,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
 
           console.log("Send input " + input);
 
-          connection.send(input.toString(), function() {
+          connection.send(input, function() {
             console.log("Write number finish: " + input);
           });
           inputIndex++;
