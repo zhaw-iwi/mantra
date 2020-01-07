@@ -35,6 +35,8 @@ var createContainer = function createContainer(aContainerImage, aCommand, aWorki
   // create a string with the arguments for the cobo-exec.sh script
   var cmdArgs = '\'' + aCommand + '\' ' + timeoutCPUArg + ' ' + timeoutSessionArg;
 
+  console.log(cmdArgs);
+
   logger.debug('dockerjs.createContainer: creating container with cmdArgs: ' + cmdArgs);
 
   // the payload we send to the Docker RemoteAPI in order to create a new container
