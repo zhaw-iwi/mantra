@@ -422,6 +422,9 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
       });
       connection.on('message', function(message) {
 
+        console.log("connection: ");
+        console.log(connection);
+
         // reset timer on each message
         if (timer) {
           clearTimeout(timer);
