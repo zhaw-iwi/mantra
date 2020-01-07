@@ -432,7 +432,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
         }
 
         // Set timeout, which sends an input after a certain time if no further messages are received
-        timer = setTimeout(sendInput, timeout);
+        // timer = setTimeout(sendInput, timeout);
 
         // check message type and convert to string (janick)
         if (message.type === 'utf8') {
