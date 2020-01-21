@@ -211,6 +211,7 @@ var stopContainer = function (aContainerId, aWaitSecUntilKill) {
     method: 'POST'
   };
 
+  console.log("Stop container:" + options.url);
 
   return request(options)
     .spread(function(response, body) {
