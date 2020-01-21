@@ -207,7 +207,7 @@ var stopContainer = function (aContainerId, aWaitSecUntilKill) {
 
   // the settings for the request we send to the Docker API
   var options = {
-    url: 'http://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/stop',
+    url: 'http://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/stop?t=2',
     method: 'POST'
   };
 
