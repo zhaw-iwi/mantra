@@ -570,9 +570,6 @@ var stopContainer = function stopContainer (req, res, next) {
   // start the container
   docker.stopContainer(containerId)
     .then(function(successResult) {
-
-      console.log("Stop?");
-
       res.status(successResult.statusCode).json({msg: successResult.msg});
     })
     .catch(function(errResult) {

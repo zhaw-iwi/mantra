@@ -200,6 +200,11 @@ var startContainer = function (aContainerId) {
 
 /**
  * Stop a container
+ *
+ * todo docker stop uses SIGTERM to stop a container. After a certain time (t=10) the container is killed with SIGKILL.
+ *  because the default 10 sec is a to long latency, we reduce it to 1sec for now. If we run into performance issues
+ *  we maybe need to find another solution.
+ *
  * @param {string} aContainerId id of the container to stop
  * @returns {bluebird} Promise
  */
@@ -207,11 +212,9 @@ var stopContainer = function (aContainerId, aWaitSecUntilKill) {
 
   // the settings for the request we send to the Docker API
   var options = {
-    url: 'http://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/stop?t=2',
+    url: 'http://' + config.docker.hostIP + ':' + config.docker.hostPort + '/containers/' + aContainerId + '/stop?t=1',
     method: 'POST'
   };
-
-  console.log("Stop container:" + options.url);
 
   return request(options)
     .spread(function(response, body) {
