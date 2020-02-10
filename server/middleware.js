@@ -68,8 +68,6 @@ var verifyAction = function (req, res, next) {
 
 var verifyActionIsRunElseNR = function verifyActionIsRun(req, res, next) {
 
-  console.log(req.mantra.action);
-
   if (util.isActionRun(req.mantra.action)) {
     next();
   }
@@ -338,15 +336,9 @@ var writeFilesToDisk = function(req, res, next) {
 
   util.isValidMantraId(lMantraId).then(function(isValid) {
       if (isValid) {
-
-        console.log("Valide Mantra ID");
-
         return lMantraId;
       }
       else {
-
-        console.log("Neue Mantra ID");
-
         return util.getNewMantraId();
       }
     })
@@ -412,8 +404,6 @@ var writeTestFilesToDisk = function writeTestFilesToDisk (req, res, next) {
  */
 var getCmdForCompileAction = function getCmdForCompileAction (req, res, next) {
 
-    console.log(req.mantra);
-
   if(req.mantra.action === 'compileandrun') {
     var cmd = languages.getCommandForCompileAndRunAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
   } else {
@@ -451,7 +441,6 @@ var getRunCommand = function getRunCommand (req, res, next) {
  * @param next next
  */
 var getCmdForCompileAndRunAction = function getCmdForCompileAndRunAction (req, res, next) {
-  console.log("getCmdForCompileAndRunAction");
   req.mantra.command = languages.getCommandForCompileAndRunAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
   next();
 };
@@ -487,9 +476,6 @@ var getCmdForTestAction = function getCmdForTestAction (req, res, next) {
  * @param next next
  */
 var setCookie = function setCookie (req, res, next) {
-
-    console.log("SetCookie");
-
   if (config.cookie.setCookie) {
     res.cookie(config.cookie.name, req.mantra.mantraId);
   }
@@ -498,9 +484,6 @@ var setCookie = function setCookie (req, res, next) {
 
 
 var createContainer = function createContainer (req, res, next) {
-
-  console.log("createContainer");
-
 
   var imageName = languages.getLanguageProperties(req.mantra.language).dockerImage;
   var timeoutSettings = languages.getLanguageProperties(req.mantra.language).timeoutSettings;
@@ -515,8 +498,6 @@ var createContainer = function createContainer (req, res, next) {
 
   docker.createContainer(imageName, req.mantra.command, mantraDir, req.mantra.stream, timeoutSettings)
     .then(function(successResult) {
-
-      console.log("Docker created");
 
       // add the details about the Websocket Url and the Url to start the container on the mantra object
       req.mantra.containerId = successResult.containerId;
