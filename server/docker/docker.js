@@ -43,7 +43,7 @@ var createContainer = function createContainer(aContainerImage, aCommand, aWorki
     AttachStdin: true,
     AttachStdout: true,
     AttachStderr: true,
-    Cmd: ['sh', '-c', 'bash /home/cobo/cobo-exec.sh '+ cmdArgs +'; exit'], // use exit because otherwise "sh" will "run forever"
+    Cmd: ['sh', '-c', 'bash /home/mantra/cobo-exec.sh '+ cmdArgs +'; exit'], // use exit because otherwise "sh" will "run forever"
     Image: aContainerImage,
     WorkingDir: aWorkingDir,
     OpenStdin: true,
