@@ -39,7 +39,7 @@ var createContainer = function createContainer(aContainerImage, aCommand, aWorki
 
   // the payload we send to the Docker RemoteAPI in order to create a new container
   var payload = {
-    Hostname: 'cobo',
+    Hostname: 'mantra',
     AttachStdin: true,
     AttachStdout: true,
     AttachStderr: true,
@@ -63,7 +63,7 @@ var createContainer = function createContainer(aContainerImage, aCommand, aWorki
   if (config.env === 'development') {
     payload.User = 'root';
   } else {
-    payload.User = 'cobo';
+    payload.User = 'mantra';
   }
 
 
