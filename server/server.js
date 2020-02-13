@@ -96,7 +96,7 @@ if(config.monitor.maxNumOfProcesses) {
 
 
 // Start server
-server.listen(config.serverPort, config.ip, function () {
+server.listen(config.serverPort, config.listenHost, function () {
     logger.info('Mantra server listening on port %d, running in %s mode', config.serverPort, app.get('env'));
 });
 

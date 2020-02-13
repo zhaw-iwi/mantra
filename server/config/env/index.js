@@ -48,6 +48,9 @@ var all = {
   // Server port
   serverPort: process.env.PORT || 9090,
 
+  // listenHost is used to specify which calls the application listens on
+  listenHost: process.env.HOST || '0.0.0.0',
+
   // Name of the mantra server
   // should be a unique identifier for the case of multiple mantra instances running on the same machine
   // e.g. for three instances use: m0, m1, m2
