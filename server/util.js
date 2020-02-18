@@ -341,7 +341,7 @@ var writeFilesToDisk = function (aFiles, aPath) {
         .then(function() {
           // write the file
 
-          return fs.writeFileAsync(filePath, content);
+          return fs.writeFileAsync(filePath, content, "utf-8");
 
         })
         .then(function() {
