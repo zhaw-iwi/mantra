@@ -340,13 +340,9 @@ var writeFilesToDisk = function (aFiles, aPath) {
         })
         .then(function() {
           // write the file
-
-          return fs.writeFileAsync(filePath, content, "utf-8");
-
-        })
-        .then(function() {
-          // resolve the promise p
-          resolve();
+          return fs.writeFile(filePath, content, "utf8", function(err) {
+             resolve();
+          });
         })
         .catch(function(err) {
           logger.error('utiljs.writeFilesToDisk: Error writing file: ' + err);
