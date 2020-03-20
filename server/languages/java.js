@@ -82,7 +82,7 @@ module.exports = {
    */
   getCommandForCompileAndRunAction: function (aFiles, aCodeboardConfig) {
     var listOfFilenames = util.getListOfFilenames(aFiles, this.filenameExtension);
-    var compileCmd = 'javac ' + listOfFilenames + '&& java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
+    var compileCmd = 'javac ' + listOfFilenames + '&& echo "Compilation successful" && java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
     return compileCmd;
   },
 
