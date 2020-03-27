@@ -458,10 +458,9 @@ var getCmdForCompileAndRunAction = function getCmdForCompileAndRunAction (req, r
  * @param next
  */
 var getCmdForTestAction = function getCmdForTestAction (req, res, next) {
-  var cmd = languages.getCommandForTestAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files, req.mantra.testFiles);
-  req.mantra.command = cmd;
+  req.mantra.command = languages.getCommandForTestAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files, req.mantra.testFiles);
   next();
-}
+};
 
 
 /**

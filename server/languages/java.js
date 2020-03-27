@@ -86,8 +86,16 @@ module.exports = {
     return compileCmd;
   },
 
-
-
+  /**
+   * Function to test a project.
+   * @param aFiles
+   * @param aCodeboardConfig
+   * @returns {string}
+   */
+  getCommandForTestAction: function (aFiles, aCodeboardConfig) {
+    var cmd = 'java -cp ./Root ' + aCodeboardConfig.MainClassForRunning  + '< ./Root/Stdin.txt';
+    return cmd;
+  },
 
 
   /**

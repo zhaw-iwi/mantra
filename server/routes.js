@@ -30,8 +30,8 @@ module.exports = function(app) {
   app.post('/:mantraId', mw.verifyActionIsCompileAndRunElseNR, mw.verifyFiles, mw.writeFilesToDisk, mw.setCookie, mw.getCmdForCompileAndRunAction, mw.createContainer, mw.handleStreamOption);
 
 
-  // todo this sequence of middleware handles "test" command
-  // app.post('/:mantraId', mw.verifyActionIsTest, mw.verifyMantraId, mw.setCookie, mw.getCmdForTestAction, mw.createContainer, /* ... */ mw.handleStreamOption);
+  // this sequence of middleware handles "test" command
+  app.post('/:mantraId', mw.verifyActionIsTest, mw.verifyMantraId, mw.setCookie, mw.getCmdForTestAction, mw.createContainer, mw.handleStreamOption);
 
   // mw.executeAndAnalyzeTestContainer
 
