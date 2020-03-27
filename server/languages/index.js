@@ -154,12 +154,11 @@ var getCommandForCompileAndRunAction = function (aLanguage, aCodeboardConfig, aF
  * @param aLanguage {string} aLanguage the language for which to get the command
  * @param aCodeboardConfig {object} aCodeboardConfig the codeboard config (e.g. codeboard.json) file
  * @param aFiles {file[]} aFiles array of the files to test (sometimes needed to generate the command)
- * @param aTestFiles {testFile[]} aTestFiles array of the files containing the tests
  * @returns {*}
  */
-var getCommandForTestAction = function (aLanguage, aCodeboardConfig, aFiles, aTestFiles) {
+var getCommandForTestAction = function (aLanguage, aCodeboardConfig, aFiles) {
   var props = languageProperties[aLanguage];
-  return props.getCommandForTestAction(aFiles, aTestFiles, aCodeboardConfig);
+  return props.getCommandForTestAction(aFiles, aCodeboardConfig);
 };
 
 
