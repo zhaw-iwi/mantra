@@ -368,7 +368,7 @@ var attachAndRunContainer = function attachAndRunContainer (aContainerId, inputs
 
       // `timer` contains the timeoutId and `timeout` the seconds to wait before firing `sendInput`
       let timer = 0,
-          timeout = 2000; // todo what is an appropriate timeout?
+          timeout = 1000; // todo what is an appropriate timeout?
 
 
       // index of current input

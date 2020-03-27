@@ -34,7 +34,7 @@ module.exports = {
     session: 900, // 15 minutes
     // time (sec) that's the maximum allowed session time in case a session is NOT a WS streaming session (i.e. no user input)
     // Note that the timeoutCPU still applies
-    sessionNoStream: 20,
+    sessionNoStream: 30,
   },
 
   // path of the working directory relative to the folder with the mantraId (used when we need to move into "/Root")
