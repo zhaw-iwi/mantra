@@ -10,6 +10,10 @@ module.exports = {
   // see also: http://stackoverflow.com/questions/26348353/mount-volume-to-docker-image-on-osx
   mantraPath: process.env.MANTRA_PATH || '/Users/hce/coboTmp',
 
+  // the path where language specific libraries are stored
+  // this folder is mounted into the docker containers
+  libraryPath: process.env.MANTRA_LIBRARY_PATH || '/mantra/server/libraries',
+
   // configuration of the Docker Remote API
   docker: {
     // the Url of the Docker Remote API
