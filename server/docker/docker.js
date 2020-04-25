@@ -50,7 +50,10 @@ var createContainer = function createContainer(aContainerImage, aCommand, aWorki
     Tty: true,
     NetworkDisabled: true,
     HostConfig: {
-      Binds: [aWorkingDir + ':' + aWorkingDir, config.libraryPath + ':' + config.libraryPath],
+      Binds: [
+          aWorkingDir + ':' + aWorkingDir,
+          config.librariesHostSource + ':' + config.librariesContainerDest
+      ],
       Ulimits: [{Name: 'nproc', Soft: config.docker.ulimitNProcSoft, Hard: config.docker.ulimitNProcHard}]
     }
   };
