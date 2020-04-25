@@ -372,7 +372,7 @@ var getListOfExternalLibraries = function(aListOfLibraries, aLibraryExtension) {
       var libraryName = aListOfLibraries[i];
       if (libraryName.indexOf(aLibraryExtension, libraryName.length - aLibraryExtension.length) !== -1) {
         var librarySourcePath = path.join(config.librariesContainerDest, libraryName);
-        strOfLibraries += ':' + librarySourcePath;
+        strOfLibraries += ((i === 0) ? '' : ':') + librarySourcePath;
       }
     }
   }
