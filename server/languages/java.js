@@ -17,6 +17,9 @@ module.exports = {
   // file extension of the source files
   filenameExtension: '.java',
 
+  // external library extension of the source files
+  externalLibraryExtension: '.jar',
+
   // is this a static or dynamic language? e.g. Python is dynamic
   isDynamicLanguage: false,
 
@@ -57,7 +60,13 @@ module.exports = {
    * @param {object} aCodeboardConfig the codeboardConfig object
    */
   getCommandForRunAction: function (aCodeboardConfig) {
-    var cmd = 'java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
+
+    if (undefined !== aCodeboardConfig.ExternalLibraries && aCodeboardConfig.ExternalLibraries.length > 0) {
+      var cmd = 'java -cp "./Root:' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '" ' + aCodeboardConfig.MainClassForRunning;
+    } else {
+      var cmd = 'java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
+    }
+
     return cmd;
   },
 
@@ -68,8 +77,15 @@ module.exports = {
    * @param {object} aCodeboardConfig the codeboardConfig object
    */
   getCommandForCompileAction: function (aFiles, aCodeboardConfig) {
+
     var listOfFilenames = util.getListOfFilenames(aFiles, this.filenameExtension);
-    var compileCmd = 'javac ' + listOfFilenames + ' && echo "Compilation successful"';
+
+    if (undefined !== aCodeboardConfig.ExternalLibraries && aCodeboardConfig.ExternalLibraries.length > 0) {
+      var compileCmd = 'javac -cp "' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '":.' + listOfFilenames + ' && echo "Compilation successful"';
+    } else {
+      var compileCmd = 'javac ' + listOfFilenames + ' && echo "Compilation successful"';
+    }
+
     return compileCmd;
   },
 
@@ -81,8 +97,7 @@ module.exports = {
    * @returns {string}
    */
   getCommandForCompileAndRunAction: function (aFiles, aCodeboardConfig) {
-    var listOfFilenames = util.getListOfFilenames(aFiles, this.filenameExtension);
-    var compileCmd = 'javac ' + listOfFilenames + '&& echo "Compilation successful" && java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
+    var compileCmd = this.getCommandForCompileAction(aFiles, aCodeboardConfig) + " && " + this.getCommandForRunAction(aCodeboardConfig);
     return compileCmd;
   },
 
