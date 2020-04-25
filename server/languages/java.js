@@ -81,7 +81,7 @@ module.exports = {
     var listOfFilenames = util.getListOfFilenames(aFiles, this.filenameExtension);
 
     if (undefined !== aCodeboardConfig.ExternalLibraries && aCodeboardConfig.ExternalLibraries.length > 0) {
-      var compileCmd = 'javac -cp "' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '":.' + listOfFilenames + ' && echo "Compilation successful"';
+      var compileCmd = 'javac -cp "' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '" ' + listOfFilenames + ' && echo "Compilation successful"';
     } else {
       var compileCmd = 'javac ' + listOfFilenames + ' && echo "Compilation successful"';
     }
