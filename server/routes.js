@@ -23,7 +23,7 @@ module.exports = function(app) {
   // here, we perform checks that are needed for both command "compile" and "run"
   app.post('/:mantraId', mw.createMantraReqObject, mw.verifyAction, mw.verifyLanguage, mw.verifyConfig, mw.nextRoute);
   // this sequence of middleware handles the "run" command
-  app.post('/:mantraId', mw.handleDynamicLanguageNR, mw.verifyActionIsRunElseNR, mw.verifyMantraId, mw.setCookie, mw.getRunCommand, mw.createContainer, mw.handleStreamOption);
+  app.post('/:mantraId', mw.handleDynamicLanguageNR, mw.verifyActionIsRunElseNR, mw.verifyMantraId, mw.setCookie, mw.getCmdForRunAction, mw.createContainer, mw.handleStreamOption);
   // this sequence of middleware handles the "compile" command
   app.post('/:mantraId', mw.verifyActionIsCompileElseNR, mw.verifyFiles, mw.writeFilesToDisk, mw.setCookie, mw.getCmdForCompileAction, mw.createContainer, mw.handleStreamOption);
   // this sequence of middleware handles the "compileAndRun" command

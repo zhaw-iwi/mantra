@@ -403,17 +403,8 @@ var writeTestFilesToDisk = function writeTestFilesToDisk (req, res, next) {
  * @param next next
  */
 var getCmdForCompileAction = function getCmdForCompileAction (req, res, next) {
-
-  if(req.mantra.action === 'compileandrun') {
-    var cmd = languages.getCommandForCompileAndRunAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
-  } else {
-    var cmd = languages.getCommandForCompileAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
-  }
-
-  req.mantra.command = cmd;
-
+  req.mantra.command = languages.getCommandForCompileAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
   next();
-
 };
 
 
@@ -423,12 +414,8 @@ var getCmdForCompileAction = function getCmdForCompileAction (req, res, next) {
  * @param res response
  * @param next next
  */
-var getRunCommand = function getRunCommand (req, res, next) {
-
-  var cmd = languages.getCommandForRunAction(req.mantra.language, req.mantra.codeboardConfig);
-
-  req.mantra.command = cmd;
-
+var getCmdForRunAction = function getCmdForRunAction (req, res, next) {
+  req.mantra.command = languages.getCommandForRunAction(req.mantra.language, req.mantra.codeboardConfig);
   next();
 
 };
@@ -723,7 +710,7 @@ module.exports = {
   writeTestFilesToDisk: writeTestFilesToDisk,
   getCmdForCompileAction: getCmdForCompileAction,
   getCmdForCompileAndRunAction: getCmdForCompileAndRunAction,
-  getRunCommand: getRunCommand,
+  getCmdForRunAction: getCmdForRunAction,
   getCmdForTestAction: getCmdForTestAction,
   setCookie: setCookie,
   createContainer: createContainer,
