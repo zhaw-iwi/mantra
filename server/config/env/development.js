@@ -8,11 +8,13 @@ module.exports = {
   // the path where Mantra should store a project's files
   // NOTE: with boot2docker, mounting folders from the host will only work correctly for subfolders in the /Users/ directory
   // see also: http://stackoverflow.com/questions/26348353/mount-volume-to-docker-image-on-osx
-  mantraPath: process.env.MANTRA_PATH || '/Users/hce/coboTmp',
+  mantraPath: process.env.MANTRA_PATH || '/home/mantra/coboTmp',
 
-  // the path where language specific libraries are stored
-  // this folder is mounted into the docker containers
-  libraryPath: process.env.MANTRA_LIBRARY_PATH || '/mantra/server/libraries',
+  // the source path to the external libraries
+  librariesHostSource: process.env.LIBRARIES_HOST_SOURCE || '/home/mantra/mantra/server/libraries',
+
+  // the container destination of external libraries
+  librariesContainerDest: process.env.LIBRARIES_CONTAINER_DEST || '/home/mantra/libraries',
 
   // configuration of the Docker Remote API
   docker: {
