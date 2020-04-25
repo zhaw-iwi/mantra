@@ -355,6 +355,31 @@ var writeFilesToDisk = function (aFiles, aPath) {
   return Promise.all(promises);
 };
 
+/**
+ * Takes an array of libraries and returns a string with all the container destination filenames
+ * that match the given libraryExtension. All the libraries are separated with ":"
+ * We return an empty string when aListOfLibraries is undefined or empty
+ * @param aListOfLibraries
+ * @param aLibraryExtension
+ * @returns {string}
+ */
+var getListOfExternalLibraries = function(aListOfLibraries, aLibraryExtension) {
+
+  var strOfLibraries = '';
+
+  if (aListOfLibraries.length) {
+    for (var i = 0; i < aListOfLibraries.length; i++) {
+      var libraryName = aFiles[i].filename;
+      if (filename.indexOf(aLibraryExtension, libraryName.length - aLibraryExtension.length) !== -1) {
+        var librarySourcePath = path.join(config.librariesContainerDest, libraryName);
+        strOfLibraries += + ':' + librarySourcePath;
+      }
+    }
+  }
+
+  return strOfLibraries.trim();
+};
+
 
 module.exports = {
   isActionCompile: isActionCompile,
@@ -368,7 +393,8 @@ module.exports = {
   isValidMantraId: isValidMantraId,
   getNewMantraId: getNewMantraId,
   getListOfFilenames: getListOfFilenames,
+  getListOfExternalLibraries: getListOfExternalLibraries,
   getCodeboardConfigObject: getCodeboardConfigObject,
   getCodeboardConfigObjectFromDisk: getCodeboardConfigObjectFromDisk,
   writeFilesToDisk: writeFilesToDisk
-}
+};
