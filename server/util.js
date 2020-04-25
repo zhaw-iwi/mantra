@@ -365,7 +365,7 @@ var writeFilesToDisk = function (aFiles, aPath) {
  */
 var getListOfExternalLibraries = function(aListOfLibraries, aLibraryExtension) {
 
-  var strOfLibraries = './';
+  var strOfLibraries = '';
 
   if (aListOfLibraries.length) {
     for (var i = 0; i < aListOfLibraries.length; i++) {
