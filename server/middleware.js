@@ -403,6 +403,10 @@ var writeTestFilesToDisk = function writeTestFilesToDisk (req, res, next) {
  * @param next next
  */
 var getCmdForCompileAction = function getCmdForCompileAction (req, res, next) {
+
+    console.log(req.mantra.action);
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<");
+
   if(req.mantra.action === 'compileandrun') {
     var cmd = languages.getCommandForCompileAndRunAction(req.mantra.language, req.mantra.codeboardConfig, req.mantra.files);
   } else {
