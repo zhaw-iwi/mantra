@@ -369,8 +369,8 @@ var getListOfExternalLibraries = function(aListOfLibraries, aLibraryExtension) {
 
   if (aListOfLibraries.length) {
     for (var i = 0; i < aListOfLibraries.length; i++) {
-      var libraryName = aFiles[i].filename;
-      if (filename.indexOf(aLibraryExtension, libraryName.length - aLibraryExtension.length) !== -1) {
+      var libraryName = aListOfLibraries[i];
+      if (libraryName.indexOf(aLibraryExtension, libraryName.length - aLibraryExtension.length) !== -1) {
         var librarySourcePath = path.join(config.librariesContainerDest, libraryName);
         strOfLibraries += + ':' + librarySourcePath;
       }
