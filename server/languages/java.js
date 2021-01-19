@@ -60,13 +60,12 @@ module.exports = {
    * @param {object} aCodeboardConfig the codeboardConfig object
    */
   getCommandForRunAction: function (aCodeboardConfig) {
-
+    let cmd;
     if (undefined !== aCodeboardConfig.ExternalLibraries && aCodeboardConfig.ExternalLibraries.length > 0) {
-      var cmd = 'java -cp "./Root:' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '" ' + aCodeboardConfig.MainClassForRunning;
+      cmd = 'java -cp "./Root:' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '" ' + aCodeboardConfig.MainClassForRunning;
     } else {
-      var cmd = 'java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
+      cmd = 'java -cp ./Root ' + aCodeboardConfig.MainClassForRunning;
     }
-
     return cmd;
   },
 
@@ -77,15 +76,13 @@ module.exports = {
    * @param {object} aCodeboardConfig the codeboardConfig object
    */
   getCommandForCompileAction: function (aFiles, aCodeboardConfig) {
-
-    var listOfFilenames = util.getListOfFilenames(aFiles, this.filenameExtension);
-
+    let listOfFilenames = util.getListOfFilenames(aFiles, this.filenameExtension);
+    let compileCmd;
     if (undefined !== aCodeboardConfig.ExternalLibraries && aCodeboardConfig.ExternalLibraries.length > 0) {
-      var compileCmd = 'javac -cp "' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '" ' + listOfFilenames + ' && echo "Compilation successful"';
+      compileCmd = 'javac -cp "' + util.getListOfExternalLibraries(aCodeboardConfig.ExternalLibraries, this.externalLibraryExtension) + '" ' + listOfFilenames + ' && echo "Compilation successful"';
     } else {
-      var compileCmd = 'javac ' + listOfFilenames + ' && echo "Compilation successful"';
+      compileCmd = 'javac ' + listOfFilenames + ' && echo "Compilation successful"';
     }
-
     return compileCmd;
   },
 
@@ -97,21 +94,19 @@ module.exports = {
    * @returns {string}
    */
   getCommandForCompileAndRunAction: function (aFiles, aCodeboardConfig) {
-    var compileCmd = this.getCommandForCompileAction(aFiles, aCodeboardConfig) + " && " + this.getCommandForRunAction(aCodeboardConfig);
-    return compileCmd;
+    return this.getCommandForCompileAction(aFiles, aCodeboardConfig) + " && " + this.getCommandForRunAction(aCodeboardConfig);
   },
 
   /**
    * Function to test a project.
+   * todo wieso funktioniert/nutzen wir das nicht?
    * @param aFiles
    * @param aCodeboardConfig
    * @returns {string}
    */
   getCommandForTestAction: function (aFiles, aCodeboardConfig) {
-    var cmd = 'java -cp ./Root ' + aCodeboardConfig.MainClassForRunning  + '< ./Root/Stdin.txt';
-    return cmd;
+    return 'java -cp ./Root ' + aCodeboardConfig.MainClassForRunning  + '< ./Root/Stdin.txt';
   },
-
 
   /**
    * Function takes a compiler output as argument and returns "true" if that output
@@ -121,12 +116,40 @@ module.exports = {
    * @returns {boolean} true is "aCompilerOutput" represents compilation errors (by default false)
    */
   hasCompilationErrors: function (aCompilerOutput) {
-    var hasErrors = true;
-
+    let hasErrors = true;
     if (aCompilerOutput === '' || aCompilerOutput === '\n' || aCompilerOutput.indexOf("Compilation successful") !== -1 ) {
       hasErrors = false;
     }
-
     return hasErrors;
+  },
+
+  /**
+   * Function that takes a compiler output as argument and returns an array of separated compilation errors.
+   * The segmentation is done with a regex expression.
+   * @param aCompilerOutput
+   * @returns {{output: string, line: number, position: number}[]}
+   */
+  getCompilationOutputArray: function(aCompilerOutput) {
+    // this regex matches until next occurrence of `./File/Name.java:x:` or end of compilation error by using positive lookahead
+    let regexForSegmentation = new RegExp('.+?(?=(\\.[A-Za-z/]+.java:\\d+:)|(\\d+ errors?$))', 'g');
+    // regex used to extract the line of occurrence
+    let regexForLine = new RegExp('(?<=\\.\\/.+[A-Za-z]+\\.java:)\\d+');
+    let regexForPosition = "";
+
+    // escape output from any line breaks to make regex easier
+    aCompilerOutput = aCompilerOutput.replace(/(\r\n|\n|\r)/gm, " ").trim(); // todo is this required?
+
+    let compilerOutputArray = aCompilerOutput.match(regexForSegmentation);
+
+    return compilerOutputArray.map(function(exception, index) {
+
+      let line = exception.match(regexForLine);
+
+      return {
+        line: line[0],
+        position: 0,
+        output: exception
+      };
+    });
   }
 };
