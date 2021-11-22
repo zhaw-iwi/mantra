@@ -139,9 +139,9 @@ module.exports = {
     // escape output from any line breaks to make regex easier
     aCompilerOutput = aCompilerOutput.replace(/(\r\n|\n|\r)/gm, " ").trim(); // todo is this required?
 
-    let compilerOutputArray = aCompilerOutput.match(regexForSegmentation);
+    let compilerOutputArray = aCompilerOutput.match(regexForSegmentation) || [aCompilerOutput];
 
-    return compilerOutputArray.map(function(exception, index) {
+    return compilerOutputArray.map(function(exception) {
 
       let line = exception.match(regexForLine);
 

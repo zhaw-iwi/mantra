@@ -199,6 +199,7 @@ var getCompilationOutputArray = function (aLanguage, aCompilerOutput) {
   if(typeof props.getCompilationOutputArray === 'function') {
     return props.getCompilationOutputArray(aCompilerOutput);
   }
+  return [];
 };
 
 
