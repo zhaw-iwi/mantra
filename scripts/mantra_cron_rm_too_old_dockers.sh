@@ -20,7 +20,7 @@
 
 # Read the max allowed age for a container from the first argument
 if [ -z "$1" ]; then
-	echo "mantra_cron_rm_too_old_dockers.sh: No max_age argument provided. Using default of 30 minutes."
+	# echo "mantra_cron_rm_too_old_dockers.sh: No max_age argument provided. Using default of 30 minutes."
 	MAX_AGE=1800
 else
 	MAX_AGE=$1
