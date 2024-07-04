@@ -28,7 +28,7 @@
 
 # Read the max allowed age for folders (all folders older than that will be deleted)
 if [ -z "$1" ]; then
-	echo "mantra_cron_rm_folders.sh: No max_folder_age argument provided. Using default of 45 minutes."
+	# echo "mantra_cron_rm_folders.sh: No max_folder_age argument provided. Using default of 45 minutes."
 	MAX_FOLDER_AGE=45;
 else
 	MAX_FOLDER_AGE=$1
@@ -36,7 +36,7 @@ fi
 
 # Read the absolute path of the Mantra project folder
 if [ -z "$2" ]; then
-	echo "mantra_cron_rm_folders.sh: No project_folder argument provided. Using default of /tmp/projects."
+	# echo "mantra_cron_rm_folders.sh: No project_folder argument provided. Using default of /tmp/projects."
 	PROJECT_FOLDER="/tmp/projects"
 else
 	PROJECT_FOLDER=$2
