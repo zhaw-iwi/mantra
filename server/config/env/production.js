@@ -11,7 +11,7 @@ module.exports = {
   mantraPath: process.env.MANTRA_PATH || '/tmp/projects',
 
   // the source path to the external libraries
-  librariesHostSource: process.env.LIBRARIES_HOST_SOURCE || '/usr/local/zhaw/app/mantra/mantra/server/libraries',
+  librariesHostSource: process.env.LIBRARIES_HOST_SOURCE || '/usr/local/zhaw/mantra/mantra/server/libraries',
 
   // the container destination of external libraries
   librariesContainerDest: process.env.LIBRARIES_CONTAINER_DEST || '/home/mantra/libraries',
