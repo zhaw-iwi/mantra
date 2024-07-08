@@ -570,13 +570,13 @@ var handleStreamOption = function handleStreamOption (req, res, next) {
         var resultPayload = {
           id: req.mantra.mantraId,
           output: stdOutput,
+          outputArray: stdOutput, // todo hier Funktion aufrufen, die den Output in einzelne Fehler aufteilt :: languages.hasCompilationErrors(req.mantra.language, stdOutput);
           stream: false
         };
 
         // if the action was compile, the result should have property "compilationError"
         if (util.isActionCompile(req.mantra.action)) {
           resultPayload.compilationError = languages.hasCompilationErrors(req.mantra.language, stdOutput);
-          resultPayload.compilationOutputArray = languages.getCompilationOutputArray(req.mantra.language, stdOutput);
         }
 
         res.status(200).json(resultPayload);

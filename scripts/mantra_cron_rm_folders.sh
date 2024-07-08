@@ -37,7 +37,7 @@ fi
 # Read the absolute path of the Mantra project folder
 if [ -z "$2" ]; then
 	# echo "mantra_cron_rm_folders.sh: No project_folder argument provided. Using default of /tmp/projects."
-	PROJECT_FOLDER="/tmp/projects"
+	PROJECT_FOLDER="/usr/local/zhaw/mantra/tmp/projects"
 else
 	PROJECT_FOLDER=$2
 fi
